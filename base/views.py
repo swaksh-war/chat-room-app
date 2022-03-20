@@ -16,17 +16,17 @@ def loginPage(request):
 
     if request.method == 'POST':
         #get the username and password to the backend
-        email = request.POST.get('email').lower()
+        username = request.POST.get('username').lower()
         password = request.POST.get('password')
 
         #check if the user already exist or not
         try:
-            user = User.objects.get(email = email)
+            user = User.objects.get(username = username)
         except:
             messages.error(request, 'user doesnt exist')
         
         #if the user exists
-        user = authenticate(request, email = email, password=password)
+        user = authenticate(request, username = username, password=password)
 
         #if the is authenticate means the above variable returns some kind of value then login and redirect to the home page
         if user is not None:
